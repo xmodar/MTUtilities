@@ -34,39 +34,47 @@ def define(word, e=False):
 		print('Antonyms')
 		for ant in antonym:
 			print('\t'+ant)
+#asynchronous retrieval of definitions
 adefine = lambda word: _thread.start_new_thread(lambda x:define(x) , (word,))
 ##############################################
-
-while True:
-	print()
-	str = input()
-	#find the definition in the dictionary
-	if str[0]==':': 
-		#suggest a spelling
-		if str[:2]=='::': 
-			str = str[2:]
-			if len(str)<1:continue
-			asay(str)
-			list = suggest(str)
-			if list is None:
-				print('No available suggestions')
-				continue
-			for sug in list:
-				print('\t'+sug)
-			continue
-		str = str[1:]
-		if str == 'cls': system('cls'); continue
-		if len(str)<1: continue
-		asay(str)
-		adefine(str)
-		continue
-	#pronounce the input
-	asay(str)
-	#print the input and remove any mistake
-	for s in str.split(' '):
-		s.replace(' ', '')
-		if len(s) < 1: continue
-		if check(s): 
-			print(s, end=' ')
-		else: print('*'*len(s), end=' ')
-	print()
+	
+if __name__ == '__main__':
+	while True:
+		print()
+		str = input()
+		
+		if len(str)>0:
+			#shell command
+			if str[0]=='$':
+				if str[1:]=='exit':
+					break
+				system(str[1:])
+				
+			#either define or suggest
+			elif str[0]==':':
+				#suggest
+				if len(str)>2 and str[1]==':':
+					str = str[2:]
+					asay(str)
+					list = suggest(str)
+					if list is None:
+						print('No available suggestions')
+					else:
+						for sug in list:
+							print('\t'+sug)
+					
+				#define
+				elif len(str)>1:
+					asay(str[1:])
+					adefine(str[1:])
+					
+			#discover spelling mistakes
+			else:
+				asay(str)
+				for s in str.split(' '):
+					s.replace(' ', '')
+					if len(s) < 1: continue
+					if check(s): 
+						print(s, end=' ')
+					else: print('*'*len(s), end=' ')
+				print()
