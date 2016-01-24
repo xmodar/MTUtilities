@@ -37,6 +37,51 @@ def define(word, e=False):
 #asynchronous retrieval of definitions
 adefine = lambda word: _thread.start_new_thread(lambda x:define(x) , (word,))
 ##############################################
+
+help = '''
+MTspeller V1.0, by ModarTensai <ModarTensai@gmail.com>
+
+This package provides a tool to help its user practice American 
+English spelling in an interactive way.
+
+    You have the following options to pick from:
+	1. Type any sentence then hit enter 
+				to hear it pronounced with all spelling mistakes highlighted
+	2. Type ":" then any word of your choice 
+				to see it in the dictionary (needs Internet connection)
+	3. Type "$" then any shell command 
+				to execute it ('help', 'cls' and 'exit' are common commands)
+	4. Type "::" then any word of your choice 
+				to suggest similarly spelled words
+		
+    Examples
+	1. >>> I love playing witt my kids
+	   >>> I love playing **** my kids
+	2. >>> :wonderful
+	   >>> Adjective
+		   extraordinarily good or great; used especially as intensifiers
+		   Synonyms
+		   fantastic
+		   remarkable
+		   outstanding
+		   awesome
+		   magnificent
+		   Antonyms
+		   usual
+		   tiny
+		   unpleasant
+		   typical
+		   unremarkable
+	3. >>> $cls
+	   >>> [Windows console screen cleared]
+	4. >>> ::wonderfl
+	   >>> wonderful
+	       wonder fl
+	       wonderland
+	       wonderer
+	       wondering
+	       wonderment
+'''
 	
 if __name__ == '__main__':
 	while True:
@@ -48,7 +93,9 @@ if __name__ == '__main__':
 			if str[0]=='$':
 				if str[1:]=='exit':
 					break
-				system(str[1:])
+				if str[1:]=='help':
+					print(help)
+				else: system(str[1:])
 				
 			#either define or suggest
 			elif str[0]==':':
