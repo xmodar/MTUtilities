@@ -1,48 +1,54 @@
-import _thread
-from os import system
+'''
+MTspeller is a command line tool that helps its users practice American 
+English spelling in an interactive way.
 
-#Spelling Checker
-import enchant
-endic = enchant.Dict('en_US')
-check = endic.check
-suggest = endic.suggest
+MTspeller: Copyright (c) 2016, ModarTensai (ModarTensai@gmail.com)
+License: BSD 2-Clause (https://opensource.org/licenses/BSD-2-Clause)
 
-#Pronouncer
-from speech import say
-#asynchronous version of say
-asay = lambda text: _thread.start_new_thread(lambda x:say(x) , (text,))
+For this tool to work, you have to have the following Python packages installed
+(This was tested on the versions provided and Python 3.5.1 installed on Windows 10)
 
-#Dictionary
-from PyDictionary import PyDictionary
-dictionary = PyDictionary()
-def define(word, e=False):
-	meaning = None
-	if check(word): meaning = dictionary.meaning(word)
-	if meaning is None: print('No such word\n'); return
-	for type, list in meaning.items():
-		print(type)
-		if not e and len(list)>3: list = list[:3]
-		for sen in list:
-			print('\t'+sen)
-	synonym = dictionary.synonym(word)
-	if synonym is not None:
-		print('Synonyms')
-		for syn in synonym:
-			print('\t'+syn)
-	antonym = dictionary.antonym(word)
-	if antonym is not None:
-		print('Antonyms')
-		for ant in antonym:
-			print('\t'+ant)
-#asynchronous retrieval of definitions
-adefine = lambda word: _thread.start_new_thread(lambda x:define(x) , (word,))
-##############################################
+    PyEnchant==1.6.6
+    PyDictionary==1.5.2
+    Speech==0.5.2
+	PyWin32 (For the corresponding version of python you have)
+	
+pip::
 
+    pip install PyEnchant==1.6.6
+    pip install PyDictionary==1.5.2
+    pip install Speech==0.5.2
+
+There was some little modefications made to the following files in order to work properly
+Nothing will be missed up and you can always backup the files just in case:
+
+    File: %PythonLocation%\Lib\site-packages\PyDictionary\Utils.py
+        Line #5 changed from
+            return BeautifulSoup(requests.get(url).text)
+        To
+            return BeautifulSoup(requests.get(url).text, 'html.parser')
+	Reason
+	    To rid of the warning from using BeautifulSoup4 without specifing default parser
+
+    File: %PythonLocation%\Lib\site-packages\speech.py
+        Line #59 changed from
+            import _thread
+        To
+            import thread
+        Line #157 changed from
+            print prompt
+        To
+            print (prompt)
+        Reason
+            To make it run in Python 3
+'''
 help = '''
 MTspeller V1.0, by ModarTensai <ModarTensai@gmail.com>
 
 This package provides a tool to help its user practice American 
 English spelling in an interactive way.
+
+https://github.com/ModarTensai/MTspeller
 
     You have the following options to pick from:
 	1. Type any sentence then hit enter 
@@ -82,6 +88,46 @@ English spelling in an interactive way.
 	       wondering
 	       wonderment
 '''
+
+import _thread
+from os import system
+
+#Spelling Checker
+import enchant
+endic = enchant.Dict('en_US')
+check = endic.check
+suggest = endic.suggest
+
+#Pronouncer
+from speech import say
+#asynchronous version of say
+asay = lambda text: _thread.start_new_thread(lambda x:say(x) , (text,))
+
+#Dictionary
+from PyDictionary import PyDictionary
+dictionary = PyDictionary()
+def define(word, e=False):
+	meaning = None
+	if check(word): meaning = dictionary.meaning(word)
+	if meaning is None: print('No such word\n'); return
+	for type, list in meaning.items():
+		print(type)
+		if not e and len(list)>3: list = list[:3]
+		for sen in list:
+			print('\t'+sen)
+	synonym = dictionary.synonym(word)
+	if synonym is not None:
+		print('Synonyms')
+		for syn in synonym:
+			print('\t'+syn)
+	antonym = dictionary.antonym(word)
+	if antonym is not None:
+		print('Antonyms')
+		for ant in antonym:
+			print('\t'+ant)
+#asynchronous retrieval of definitions
+adefine = lambda word: _thread.start_new_thread(lambda x:define(x) , (word,))
+##############################################
 	
 if __name__ == '__main__':
 	while True:

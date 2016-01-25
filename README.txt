@@ -1,7 +1,7 @@
-mtspeller:  Python program to help you practice spelling in English
+MTspeller:  Python program to help you practice spelling in English
 ===================================================================
 
-This package provides a tool to help its user practice American 
+This command line tool helps its users practice American 
 English spelling in an interactive way.
 
 
@@ -12,7 +12,7 @@ MTspeller is an interactive console that let you type anything in your mind and 
 you hit enter it pronounce the sentence you wrote and highlight any spelling mistakes
 you made. You can, of course, try again as many times as you want and you can even
 make it suggest to you the correct spelling. It ships, also, with a dictionary to define
-words and gives synonyms and antonyms for the world; if exist. It needs Internet
+words and gives synonyms and antonyms for the word; if exist. It needs Internet
 connection to work properly.
 
 
@@ -33,7 +33,8 @@ pip::
     pip install PyDictionary==1.5.2
     pip install Speech==0.5.2
 
-There was some little modefications made to the following files in order to work properly:
+There was some little modefications made to the following files in order to work properly
+Nothing will be missed up and you can always backup the files just in case:
 
     File: %PythonLocation%\Lib\site-packages\PyDictionary\Utils.py
         Line #5 changed from
