@@ -8,7 +8,7 @@ Table of Contents
 
  * [MTspeller](#mtspeller)
  * [Video Cutter](#video-cutter)
- * [HowTO: Use Latex on SublimeText 3](#howto-latex-on-sublimetext-3)
+ * [HowTO: Use Latex on SublimeText 3](#howto:-latex-on-sublimetext-3)
 
 MTspeller
 =========
@@ -135,6 +135,6 @@ How do I use it?
 
 Just provide the file name of the video and the file name of the output and the starting and ending frames starting from 0.
 
-HowTo Latex on SublimeText 3
+HowTo: Latex on SublimeText 3
 =============================
 [This is](HowTo/Latex-Sublime.md) a guide to work with latex in SublimeText 3 on Ubuntu 14.04 LTS
