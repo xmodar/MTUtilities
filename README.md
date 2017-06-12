@@ -8,6 +8,7 @@ Table of Contents
 
  * [MTspeller](#mtspeller)
  * [Video Cutter](#video-cutter)
+ * [CSR Matrix Row Slicing](#csr-matrix-row-slicing)
  * [HowTO: Use Latex on SublimeText 3](#howto-latex-on-sublimetext-3)
 
 MTspeller
@@ -134,6 +135,13 @@ How do I use it?
 ----------------
 
 Just provide the file name of the video and the file name of the output and the starting and ending frames starting from 0.
+
+
+CSR Matrix Row Slicing
+======================
+
+[Two functions](csr_matrix/rows.py) to slice rows from a scipy.sparse.csr_matrix.
+
 
 HowTo Latex on SublimeText 3
 =============================
